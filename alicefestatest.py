@@ -34,7 +34,7 @@ def cleanhtml(raw_html):
     return cleantext
 
 def getContent(d):
-    r = random.choice(*d.keys())
+    r = random.choice([*d.keys()])
     return r
 
 with open('search.txt', 'r', encoding='UTF8') as s:
@@ -77,9 +77,13 @@ class dgListener(StreamListener):
 
             # 조사
             else: 
-                answers = search['해적선장'][0]
-                if search['해적선장'][1] != '':
-                    image_name = search['해적선장'][1]
+                content = re.sub(re.compile('<.*?>'), '', notification['status']['content'])
+                contents = content.split('[')
+                contents = contents[1].split(']')
+                keyword = contents[0]
+                answers = search[keyword][0]
+                if search[keyword][1] != '':
+                    image_name = search[keyword][1]
                     image = mastodon.media_post(image_name, mime_type = "image/png")
                     mastodon.status_post("@" + notification['account']['username'] + "\n" + 
                                         answers, in_reply_to_id = id, 
