@@ -3,7 +3,6 @@
 import os
 import http.server
 import socketserver
-import script
 import re
 import random
 import ast
@@ -18,9 +17,9 @@ from mastodon.streaming import StreamListener
 BASE = 'https://orbitof.kr'
 
 m = Mastodon(
-    client_id="-",
-    client_secret="-",
-    access_token="-",
+    client_id="VO0wPbh3fTBD0n0R4WzRytEB1Uzswpg9Xe3M3YlmS1E",
+    client_secret="OqYxGei3y8GBdUvNfOBEUBfmz5QHkpcDTwWNSyTdHIo",
+    access_token="EfL5tQB6-vS2AFX0aM3He-CaiHKHqvnIXIxyO5nuNI0",
     api_base_url=BASE
 )
 
