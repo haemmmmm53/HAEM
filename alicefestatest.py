@@ -54,15 +54,9 @@ class dgListener(StreamListener):
         if notification['type'] == 'mention':
             id = notification['status']['id']
             visibility = notification['status']['visibility']
-            got = cleanhtml(notification['status']['content'])
-
-            if got.__contains__('[') is False or got.__contains__(']') is False:
-                pass
-
-            keyword = got[got.find('[')+1:got.find(']')]
 
             # 인형가챠
-            if keyword == '인형가챠':
+            if '[인형가챠]' in notification['status']['content']:
                 answers = search[keyword][0]
                 image_name = search[keyword][1]
                 image = mastodon.media_post(image_name, mime_type = "image/png")
@@ -72,7 +66,7 @@ class dgListener(StreamListener):
                 pass
 
             # 스탬프가챠
-            if keyword == '스탬프가챠':
+            if '[스탬프가챠]' in notification['status']['content']:
                 answers = search[keyword][0]
                 image_name = search[keyword][1]
                 image = mastodon.media_post(image_name, mime_type = "image/png")
