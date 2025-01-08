@@ -67,13 +67,12 @@ class dgListener(StreamListener):
 
             # 스탬프가챠
             if '[체질반 스탬프]' in notification['status']['content']:
-                content_key = getContent(stamp)
-                answers, image_name = stamp[content_key]
-                image = mastodon.media_post(image_name, mime_type="image/png")
-                mastodon.status_post("@" + notification['account']['username'] + "\n" + answers, 
-                                     in_reply_to_id=id, 
-                                     visibility=visibility, 
-                                     media_ids=image["id"])
+                answers = stamp[getContent(stamp)][0]
+                image_name = stamp[getContent(stamp)][1]
+                image = mastodon.media_post(image_name, mime_type = "image/png")
+                mastodon.status_post("@" + notification['account']['username'] + "\n" + 
+                                    answers, in_reply_to_id = id, 
+                                    visibility = visibility, media_ids=image["id"])
                 pass
             
             # 조사
