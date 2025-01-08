@@ -41,14 +41,14 @@ def getContent(d):
 
 class dgListener(StreamListener):
     anwers = ''
-    with open('search.txt', 'r') as search:
-        ast.literal_eval(search.read())
+    with open('search.txt', 'r') as s:
+        search = ast.literal_eval(s.read())
     
-    with open('doll.txt', 'r') as doll:
-        ast.literal_eval(doll.read())
+    with open('doll.txt', 'r') as d:
+        doll = ast.literal_eval(d.read())
 
-    with open('stamp.txt', 'r') as stamp:
-        ast.literal_eval(stamp.read())
+    with open('stamp.txt', 'r') as st:
+        stamp = ast.literal_eval(st.read())
 
     def on_notification(self, notification):
         if notification['type'] == 'mention':
