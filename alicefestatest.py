@@ -65,22 +65,25 @@ class dgListener(StreamListener):
                                     visibility = visibility, media_ids=image["id"])
                 pass
 
-    import random
+import random
 
-            # 스탬프가챠
-            if '[체질반 스탬프]' in notification['status']['content']:
-                # 키를 무작위로 선택
-                selected_key = random.choice(list(stamp.keys()))
-                # 선택된 키를 기반으로 값 가져오기
-                answers = stamp[selected_key][0]
-                image_name = stamp[selected_key][1]
+# 스탬프가챠
+if '[체질반 스탬프]' in notification['status']['content']:
+    # 키를 무작위로 선택
+    selected_key = random.choice(list(stamp.keys()))
+    # 선택된 키를 기반으로 값 가져오기
+    answers = stamp[selected_key][0]
+    image_name = stamp[selected_key][1]
     
-                # 이미지 업로드 및 답변 작성
-                image = mastodon.media_post(image_name, mime_type="image/png")
-                mastodon.status_post("@" + notification['account']['username'] + "\n" + answers,
-                in_reply_to_id=id,
-                visibility=visibility,
-                media_ids=image["id"])
+    # 이미지 업로드 및 답변 작성
+    image = mastodon.media_post(image_name, mime_type="image/png")
+    mastodon.status_post(
+        "@" + notification['account']['username'] + "\n" + answers,
+        in_reply_to_id=id,
+        visibility=visibility,
+        media_ids=image["id"]
+    )
+
 
             
             # 조사
