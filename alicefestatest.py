@@ -70,12 +70,11 @@ class dgListener(StreamListener):
                 content_key = getContent(stamp)
                 answers, image_name = stamp[content_key]
                 image = mastodon.media_post(image_name, mime_type="image/png")
-                mastodon.status_post(
-                "@" + notification['account']['username'] + "\n" + answers, 
-                in_reply_to_id=id, 
-                visibility=visibility, 
-                media_ids=image["id"]
-                )
+                mastodon.status_post("@" + notification['account']['username'] + "\n" + answers, 
+                                     in_reply_to_id=id, 
+                                     visibility=visibility, 
+                                     media_ids=image["id"])
+                pass
             
             # 조사
             else: 
