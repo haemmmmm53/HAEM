@@ -38,17 +38,18 @@ def getContent(d):
     script = d[r][0]
     image = d[r][1]
 
+with open('search.txt', 'r', encoding='UTF8') as s:
+        search = ast.literal_eval(s.read())
+    
+with open('doll.txt', 'r', encoding='UTF8') as d:
+    doll = ast.literal_eval(d.read())
+
+with open('stamp.txt', 'r', encoding='UTF8') as st:
+    stamp = ast.literal_eval(st.read())
 
 class dgListener(StreamListener):
     anwers = ''
-    with open('search.txt', 'r', encoding='UTF8') as s:
-        search = ast.literal_eval(s.read())
     
-    with open('doll.txt', 'r', encoding='UTF8') as d:
-        doll = ast.literal_eval(d.read())
-
-    with open('stamp.txt', 'r', encoding='UTF8') as st:
-        stamp = ast.literal_eval(st.read())
 
     def on_notification(self, notification):
         if notification['type'] == 'mention':
@@ -57,8 +58,8 @@ class dgListener(StreamListener):
 
             # 인형가챠
             if '[인형가챠]' in notification['status']['content']:
-                answers = doll[keyword][0]
-                image_name = doll[keyword][1]
+                answers = doll[getContent(doll)][0]
+                image_name = doll[getContent(doll)][1]
                 image = mastodon.media_post(image_name, mime_type = "image/png")
                 mastodon.status_post("@" + notification['account']['username'] + "\n" + 
                                     answers, in_reply_to_id = id, 
@@ -67,8 +68,8 @@ class dgListener(StreamListener):
 
             # 스탬프가챠
             if '[스탬프가챠]' in notification['status']['content']:
-                answers = stamp[keyword][0]
-                image_name = stamp[keyword][1]
+                answers = stamp[getContent(stamp)][0]
+                image_name = stamp[getContent(stamp)][1]
                 image = mastodon.media_post(image_name, mime_type = "image/png")
                 mastodon.status_post("@" + notification['account']['username'] + "\n" + 
                                     answers, in_reply_to_id = id, 
@@ -77,9 +78,9 @@ class dgListener(StreamListener):
 
             # 조사
             else: 
-                answers = search[keyword][0]
-                if search[keyword][1] != '':
-                    image_name = search[keyword][1]
+                answers = search['해적선장'][0]
+                if search['해적선장'][1] != '':
+                    image_name = search['해적선장'][1]
                     image = mastodon.media_post(image_name, mime_type = "image/png")
                     mastodon.status_post("@" + notification['account']['username'] + "\n" + 
                                         answers, in_reply_to_id = id, 
