@@ -16,7 +16,7 @@ from mastodon.streaming import StreamListener
 
 BASE = 'https://orbitof.kr'
 
-m = Mastodon(
+mastodon = Mastodon(
     client_id="VO0wPbh3fTBD0n0R4WzRytEB1Uzswpg9Xe3M3YlmS1E",
     client_secret="OqYxGei3y8GBdUvNfOBEUBfmz5QHkpcDTwWNSyTdHIo",
     access_token="EfL5tQB6-vS2AFX0aM3He-CaiHKHqvnIXIxyO5nuNI0",
@@ -106,6 +106,6 @@ port = int(os.getenv('PORT', 80))
 print('Listening on port %s' % (port))
 httpd = socketserver.TCPServer(('', port), Handler)
 
-Mastodon.stream_user(dgListener())
+mastodon.stream_user(dgListener())
 
 httpd.serve_forever()
