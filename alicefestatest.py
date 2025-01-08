@@ -30,8 +30,8 @@ print('성공적으로 로그인 되었습니다.')
 CLEANR = re.compile('<.*?>')
 
 def cleanhtml(raw_html):
-  cleantext = re.sub(CLEANR, '', raw_html)
-  return cleantext
+    cleantext = re.sub(CLEANR, '', raw_html)
+    return cleantext
 
 def getContent(d):
     r = random.choice(d.Keys())
