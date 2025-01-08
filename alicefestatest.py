@@ -57,8 +57,8 @@ class dgListener(StreamListener):
 
             # 인형가챠
             if '[인형가챠]' in notification['status']['content']:
-                answers = search[keyword][0]
-                image_name = search[keyword][1]
+                answers = doll[keyword][0]
+                image_name = doll[keyword][1]
                 image = mastodon.media_post(image_name, mime_type = "image/png")
                 mastodon.status_post("@" + notification['account']['username'] + "\n" + 
                                     answers, in_reply_to_id = id, 
@@ -67,8 +67,8 @@ class dgListener(StreamListener):
 
             # 스탬프가챠
             if '[스탬프가챠]' in notification['status']['content']:
-                answers = search[keyword][0]
-                image_name = search[keyword][1]
+                answers = stamp[keyword][0]
+                image_name = stamp[keyword][1]
                 image = mastodon.media_post(image_name, mime_type = "image/png")
                 mastodon.status_post("@" + notification['account']['username'] + "\n" + 
                                     answers, in_reply_to_id = id, 
