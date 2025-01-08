@@ -34,9 +34,8 @@ def cleanhtml(raw_html):
     return cleantext
 
 def getContent(d):
-    r = random.choice(d.keys())
-    script = d[r][0]
-    image = d[r][1]
+    r = random.choice(*d.keys())
+    return r
 
 with open('search.txt', 'r', encoding='UTF8') as s:
         search = ast.literal_eval(s.read())
