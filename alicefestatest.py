@@ -34,7 +34,7 @@ def cleanhtml(raw_html):
     return cleantext
 
 def getContent(d):
-    r = random.choice(d.Keys())
+    r = random.choice(d.keys())
     script = d[r][0]
     image = d[r][1]
 
